@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capstone.jmt.mapper.ShopMapper">
+
+    <resultMap id="shopLoginMap" type="com.capstone.jmt.data.LoginUser">
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="first_name" property="firstName" jdbcType="VARCHAR" />
+        <result column="last_name" property="lastName" jdbcType="VARCHAR" />
+        <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+        <result column="contact_no" property="contactNo" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="ref_role_user_id" property="refRoleUserId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <resultMap id="materialsMap" type="com.capstone.jmt.data.Material">
+        <result column="material_id" property="materialId" jdbcType="VARCHAR" />
+        <result column="material_desc" property="materialDesc" jdbcType="VARCHAR" />
+        <result column="quantity" property="qty" jdbcType="INTEGER" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="last_order" property="lastOrder" jdbcType="TIMESTAMP" />
+        <result column="created_on" property="createdOn" jdbcType="TIMESTAMP" />
+        <result column="created_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="RefUserMap" type="com.capstone.jmt.data.RefUser">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_user" property="roleUser" jdbcType="VARCHAR"/>
+        <result column="last_id" property="lastId" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+
+
+    <select id="loadUserByEmail" resultMap="shopLoginMap" resultType="com.capstone.jmt.data.LoginUser">
+        SELECT * FROM data_employee WHERE email = #{email}
+    </select>
+
+    <select id="loadUserByEmpId" resultMap="shopLoginMap" resultType="com.capstone.jmt.data.LoginUser">
+        SELECT * FROM data_employee WHERE emp_id = #{empId}
+    </select>
+
+    <select id="getAllUsers" resultMap="shopLoginMap" resultType="java.util.List">
+        SELECT * FROM data_employee
+    </select>
+
+    <select id="getAllMaterials" resultMap="materialsMap" resultType="java.util.List">
+        SELECT * FROM data_materials
+    </select>
+
+    <select id="getRefUsers" resultMap="RefUserMap" resultType="java.util.List">
+        SELECT * FROM ref_role_user
+    </select>
+
+    <insert id="addUser" flushCache="true">
+      INSERT INTO data_employee(
+      first_name, last_name, emp_id, contact_no, email, password,ref_role_user_id
+      ) VALUES (
+      #{newUser.firstName, jdbcType=VARCHAR},
+      #{newUser.lastName, jdbcType=VARCHAR},
+      #{newUser.empId, jdbcType=VARCHAR},
+      #{newUser.contactNo, jdbcType=VARCHAR},
+      #{newUser.email, jdbcType=VARCHAR},
+      #{newUser.password, jdbcType=VARCHAR},
+      #{newUser.refRoleUserId, jdbcType=INTEGER}
+      )
+    </insert>
+
+    <update id="incrementId" flushCache="true">
+        UPDATE ref_role_user
+        SET last_id = last_id + 1
+        WHERE id = #{id}
+    </update>
+
+    <select id="getLastId" resultType="java.lang.Integer">
+        SELECT last_id FROM ref_role_user
+        WHERE id = #{id}
+    </select>
+    
+    <!--<select id="getShopInfoById" resultMap="shopInfoMap" resultType="com.capstone.jmt.data.ShopInfo">-->
+        <!--SELECT * FROM shop_info WHERE id = #{id}-->
+    <!--</select>-->
+    <!---->
+    <!--<select id="getShopLoginById" resultMap="shopLoginMap" resultType="com.capstone.jmt.data.LoginUser">-->
+        <!--SELECT * FROM login WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<select id="getShopLocationById" resultMap="shopLocationMap" resultType="com.capstone.jmt.data.ShopLocation">-->
+        <!--SELECT * FROM shop_location WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<select id="getShopSalesInformationById" resultMap="shopSalesInformationMap" resultType="com.capstone.jmt.data.ShopSalesInformation">-->
+        <!--SELECT * FROM shop_sales_information WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<insert id="addShopInfo" parameterType="com.capstone.jmt.data.ShopInfo">-->
+        <!--INSERT INTO shop_info-->
+        <!--(id,-->
+        <!--business_name,-->
+        <!--address,-->
+        <!--email-->
+        <!--cellphone_no,-->
+        <!--alternate_no)-->
+        <!--VALUES-->
+        <!--(#{shop.id, jdbcType=VARCHAR},-->
+        <!--#{shop.businessName, jdbcType=VARCHAR},-->
+        <!--#{shop.address, jdbcType=VARCHAR},-->
+        <!--#{shop.email, jdbcType=VARCHAR},-->
+        <!--#{shop.cellphoneNo, jdbcType=VARCHAR},-->
+        <!--#{shop.alternateNo, jdbcType=VARCHAR})-->
+    <!--</insert>-->
+
+    <!--<update id="updateShopInfo" parameterType="com.capstone.jmt.data.ShopInfo">-->
+        <!--UPDATE shop_info-->
+        <!--SET-->
+        <!--business_name = #{shop.businessName, jdbcType=VARCHAR},-->
+        <!--address = #{shop.address, jdbcType=VARCHAR},-->
+        <!--email = #{shop.email, jdbcType=VARCHAR},-->
+        <!--cellphone_no = #{shop.cellphoneNo, jdbcType=VARCHAR},-->
+        <!--alternate_no = #{shop.alternateNo, jdbcType=VARCHAR},-->
+        <!--time_open = #{shop.timeOpen, jdbcType=VARCHAR},-->
+        <!--time_close = #{shop.timeClose, jdbcType=VARCHAR},-->
+        <!--allow_swap = #{shop.allowSwap, jdbcType=BOOLEAN},-->
+        <!--days_available = #{shop.daysAvailable, jdbcType=VARCHAR},-->
+        <!--open_on_holidays = #{shop.openOnHolidays, jdbcType=BOOLEAN},-->
+        <!--updated_by = #{shop.updatedBy, jdbcType=VARCHAR}-->
+        <!--WHERE-->
+        <!--id = #{shop.id, jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+    <!--<insert id="addShopLogin" parameterType="com.capstone.jmt.data.ShopLogin">-->
+        <!--INSERT INTO shop_login-->
+        <!--(id,-->
+        <!--username,-->
+        <!--password,-->
+        <!--email,-->
+        <!--first_name,-->
+        <!--last_name,-->
+        <!--middle_name,-->
+        <!--staff_of)-->
+        <!--VALUES-->
+        <!--(#{shopUser.id, jdbcType=VARCHAR},-->
+        <!--#{shopUser.username, jdbcType=VARCHAR},-->
+        <!--#{shopUser.password, jdbcType=VARCHAR},-->
+        <!--#{shopUser.email, jdbcType=VARCHAR},-->
+        <!--#{shopUser.firstName, jdbcType=VARCHAR},-->
+        <!--#{shopUser.lastName, jdbcType=VARCHAR},-->
+        <!--#{shopUser.middleName, jdbcType=VARCHAR},-->
+        <!--#{shopUser.staffOf, jdbcType=VARCHAR}-->
+        <!--)-->
+    <!--</insert>-->
+
+    <!--<update id="updateShopLogin" flushCache="true">-->
+        <!--UPDATE shop_login-->
+        <!--SET-->
+        <!--username = #{shopUser.username, jdbcType=VARCHAR},-->
+        <!--password = #{shopUser.password, jdbcType=VARCHAR},-->
+        <!--email = #{shopUser.email, jdbcType=VARCHAR},-->
+        <!--first_name = #{shopUser.firstName, jdbcType=VARCHAR},-->
+        <!--last_name = #{shopUser.lastName, jdbcType=VARCHAR},-->
+        <!--middle_name = #{shopUser.middleName, jdbcType=VARCHAR}-->
+        <!--WHERE-->
+        <!--id = #{shopUser.id, jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+    <!--<insert id="addShopLocation" parameterType="com.capstone.jmt.data.ShopLocation">-->
+        <!--INSERT INTO shop_location-->
+        <!--(id,-->
+        <!--shop_address,-->
+        <!--shop_longitude,-->
+        <!--shop_latitude)-->
+        <!--VALUES-->
+        <!--(#{shop.id}, jdbcType=VARCHAR},-->
+        <!--#{shop.shopAddress, jdbcType=VARCHAR},-->
+        <!--#{shop.shopLongitude, jdbcType=FLOAT},-->
+        <!--#{shop.shopLatitude, jdbcType=FLOAT})-->
+    <!--</insert>-->
+
+    <!--<update id="updateShopLocation" flushCache="true">-->
+        <!--UPDATE shop_location-->
+        <!--SET-->
+        <!--shop_address = #{shop.shopAddress, jdbcType=VARCHAR},-->
+        <!--shop_longitude = #{shop.shopLongitude, jdbcType=FLOAT},-->
+        <!--shop_latitude = #{shop.shopLatitude, jdbcType=FLOAT}-->
+        <!--WHERE-->
+        <!--id = #{shop.id, jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+    <!--<insert id="addShopSalesInformation" parameterType="com.capstone.jmt.data.ShopSalesInformation">-->
+        <!--INSERT INTO shop_sales_information-->
+        <!--(id,-->
+        <!--round_offered,-->
+        <!--slim_offered,-->
+        <!--round_stock,-->
+        <!--slim_stock,-->
+        <!--distilled,-->
+        <!--purified,-->
+        <!--mineral,-->
+        <!--alkaline,-->
+        <!--distilled_price,-->
+        <!--purified_price,-->
+        <!--mineral_price,-->
+        <!--alkaline_price)-->
+        <!--VALUES-->
+        <!--(#{shop.id, jdbcType=VARCHAR},-->
+        <!--#{shop.roundOffered, jdbcType=BOOLEAN},-->
+        <!--#{shop.slimOffered, jdbcType=BOOLEAN},-->
+        <!--#{shop.roundStock, jdbcType=INTEGER},-->
+        <!--#{shop.slimStock, jdbcType=INTEGER},-->
+        <!--#{shop.distilled, jdbcType=BOOLEAN},-->
+        <!--#{shop.purified, jdbcType=BOOLEAN},-->
+        <!--#{shop.mineral, jdbcType=BOOLEAN},-->
+        <!--#{shop.alkaline, jdbcType=BOOLEAN},-->
+        <!--#{shop.distilledPrice, jdbcType=DOUBLE},-->
+        <!--#{shop.purifiedPrice, jdbcType=DOUBLE},-->
+        <!--#{shop.mineralPrice, jdbcType=DOUBLE},-->
+        <!--#{shop.alkalinePrice, jdbcType=DOUBLE})-->
+    <!--</insert>-->
+
+    <!--<update id="updateShopSalesInformation" flushCache="true" parameterType="com.capstone.jmt.data.ShopSalesInformation">-->
+        <!--UPDATE shop_sales_information-->
+        <!--SET-->
+        <!--roundOffered = #{shop.roundOffered, jdbcType=BOOLEAN},-->
+        <!--slim_offered = #{shop.slimOffered, jdbcType=BOOLEAN},-->
+        <!--round_stock = #{shop.roundStock, jdbcType=INTEGER},-->
+        <!--slim_stock = #{shop.slimStock, jdbcType=INTEGER},-->
+        <!--distilled = #{shop.distilled, jdbcType=BOOLEAN},-->
+        <!--purified = #{shop.purified, jdbcType=BOOLEAN},-->
+        <!--mineral = #{shop.mineral, jdbcType=BOOLEAN},-->
+        <!--alkaline = #{shop.alkaline, jdbcType=BOOLEAN},-->
+        <!--distilled_price = #{shop.distilledPrice, jdbcType=DOUBLE},-->
+        <!--purified_price = #{shop.purifiedPrice, jdbcType=DOUBLE},-->
+        <!--mineral_price = #{shop.mineralPrice, jdbcType=DOUBLE},-->
+        <!--alkaline_price = #{shop.alkalinePrice, jdbcType=DOUBLE}-->
+        <!--WHERE-->
+        <!--id = #{shop.id, jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+    <!--<select id="getTotalSalesById" resultType="java.lang.Double">-->
+        <!--SELECT SUM(total_cost)-->
+        <!--FROM order_info-->
+        <!--WHERE ordered_from = #{shopId}-->
+    <!--</select>-->
+
+    <!--<select id="getSalesCount" resultType="java.lang.Integer">-->
+        <!--SELECT COUNT(id)-->
+        <!--FROM order_info-->
+        <!--WHERE ordered_from = #{shopId}-->
+    <!--</select>-->
+
+    <!--<select id="getTotalRatings" resultType="java.lang.Integer">-->
+        <!--SELECT SUM(rating_given)-->
+        <!--FROM order_info-->
+        <!--WHERE ordered_from = #{shopId}-->
+    <!--</select>-->
+
+    <!--<select id="getReviewsCount" resultType="java.lang.Integer">-->
+        <!--SELECT COUNT(id)-->
+        <!--FROM order_info-->
+        <!--WHERE rating_given >= 0 AND ordered_from = #{shopId}-->
+    <!--</select>-->
+
+    <!--<select id="getTotalSalesToday" resultType="java.lang.Double">-->
+        <!--SELECT SUM(total_cost)-->
+        <!--FROM order_info-->
+        <!--WHERE created_on::DATE = now()::DATE-->
+        <!--AND ordered_from = #{shopId}-->
+    <!--</select>-->
+
+    <!--<select id="getInventoryCount" resultType="java.lang.Integer">-->
+        <!--SELECT SUM(round_stock + slim_stock)-->
+        <!--FROM shop_sales_information-->
+        <!--WHERE id = #{shopId}-->
+    <!--</select>-->
+
+    <!--<update id="updateRoundStock" flushCache="true">-->
+        <!--UPDATE shop_sales_information-->
+        <!--SET round_stock = #{stock},-->
+        <!--updated_by = #{username}-->
+        <!--WHERE id = #{shopId}-->
+    <!--</update>-->
+
+    <!--<update id="updateSlimStock" flushCache="true">-->
+        <!--UPDATE shop_sales_information-->
+        <!--SET slim_stock = #{stock},-->
+        <!--updated_by = #{username}-->
+        <!--WHERE id = #{shopId}-->
+    <!--</update>-->
+
+    <!--<update id="updatePrices" flushCache="true">-->
+        <!--UPDATE shop_sales_information-->
+        <!--SET distilledPrice = #{shop.distilledPrice, jdbcType=NUMERIC},-->
+        <!--purifiedPrice = #{shop.purifiedPrice, jdbcType=NUMERIC},-->
+        <!--mineralPrice = #{shop.mineralPrice, jdbcType=NUMERIC},-->
+        <!--alkalinePrice = #{shop.alkalinePrice, jdbcType=NUMERIC},-->
+        <!--updated_by = #{shop.updatedBy, jdbcType=VARCHAR}-->
+        <!--WHERE id = #{shop.id, jdbcType=VARCHAR}-->
+    <!--</update>-->
+</mapper>

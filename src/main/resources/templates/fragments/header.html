@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{../static/vendor/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+
+    <link href="../../static/css/style.css"
+          th:href="@{../../static/css/style.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+    <div th:fragment="header">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" th:href="@{/dashboard}"><i class="fa fa-buildin-o" aria-hidden="true"></i> &nbsp; WPPS Portal</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+
+
+
+                <!-- /.dropdown -->
+                <label>Logged in as: <span th:text="*{email}"> </span> </label>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i><span class="label label-info" th:text="*{email}"></span> <i class="fa fa-caret-down fa-fw"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#" th:href="@{/logout}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse" >
+                    <ul class="nav" id="side-menu">
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/dashboard}"><i class="fa fa-dashboard fa-fw"></i>DASHBOARD</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/request}"><i class="fa fa-users fa-fw"></i>Users</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/approval}"><i class="fa fa-cubes fa-fw"></i>Purchase Requisition</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/procure}"><i class="fa fa-thumbs-up fa-fw"></i>Approval</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/receive}"><i class="fa fa-money fa-fw"></i>Budget</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/manage}"><i class="fa fa-folder-open-o fa-fw"></i>Material</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/report}"><i class="fa fa-industry fa-fw"></i>Supplier</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/settings}"><i class="fa fa-shopping-cart fa-fw"></i>Purchase Order</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/sample}"><i class="fa fa-file-text-o fa-fw"></i>Invoice</a></li>
+                        <li style="margin-bottom: 10px"><a href="#" th:href="@{/sample}"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+    </div>
+</body>
+</html>
