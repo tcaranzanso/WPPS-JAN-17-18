@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>AquaJMT Home</title>
+    <title>WPPS | Budget</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="">
-            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-        </div>
-    </div>
-</div>
-            <div class="col-md-8" style="background-color: whitesmoke !important;">
-                <div class="header center">USERS LIST</div>
-                <br />
-                <div th:if="${not #lists.isEmpty(users)}">
-                    <table class="table table-condensed">
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Middle Name</th>
-                            <th>Cellphone No</th>
-                            <th>Landline</th>
-                            <th>Created On</th>
-                            <th>Updated On</th>
-                        </tr>
-                        <tr th:each="user : ${users}">
-                            <td th:text="${user.id}">Id</td>
-                            <td th:text="${user.username}">User Name</td>
-                            <td th:text="${user.password}">Password</td>
-                            <td th:text="${user.email}">Email</td>
-                            <td th:text="${user.firstName}">Email</td>
-                            <td th:text="${user.lastName}">Email</td>
-                            <td th:text="${user.middleName}">Email</td>
-                            <td th:text="${user.cellphoneNo}">Email</td>
-                            <td th:text="${user.landline}">Email</td>
-                            <td th:text="${user.createdOn}">Created On</td>
-                            <td th:text="${user.updatedOn}">Updated On</td>
-                        </tr>
-                    </table>
-
-                </div>
-                <div th:if="${#lists.isEmpty(users)}">
-                    No Data Yet. Please create a new user.
-                </div>
+<div id="wrapper" style="background-color: #014189">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="">
+                <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
             </div>
         </div>
-
     </div>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Budget</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="chat-panel panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-comments fa-fw"></i> See what your customers have said and how they rated your shop here.
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <ul class="chat">
+                    <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong  style="color: #2d4373">Jack Sparrow</strong>
+                                <small class="pull-right text-muted">
+                                    Rating: <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                                </small>
+                            </div>
+                            <p>
+                                nakabili ako ng tubig ayos!
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<!-- /#page-wrapper -->
+
+
+
 </body>
 </html>

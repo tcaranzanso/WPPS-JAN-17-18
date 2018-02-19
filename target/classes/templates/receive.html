@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>WPPS | Budget</title>
+    <title>AquaJMT | Transactions</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <!--<script src="../static/js/angular.min.js"></script>-->
-    <script type="text/javascript" src="../static/js/1.js"></script>
+
 </head>
 <body>
 <div id="wrapper" style="background-color: #014189">
@@ -18,68 +14,64 @@
             </div>
         </div>
     </div>
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Customer Ratings</h1>
+                <h1 class="page-header">Transactions</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div>
-            <table id="eletable" ng-init="check=''" class="table table-responsive col-md-12">
-                <tr>
-                    <th ng-click="order('name')">Name</th>
-                    <th ng-click="order('designation')">Designation</th>
-                    <th ng-click="order('company.name')">Company Name</th>
-                    <th ng-click="order('rating')">Ratings</th>
-                    <th ng-click="order('action')">Check</th>
-                    <th>Actions</th>
-                </tr>
-                <tr ng-repeat="client in clients | orderBy:predicate:reverse | filter:searchtest | filter: greaterThan('rating') | limitTo:pagelimit:sstart">
-                    <td>
-                        <div class="labelValues">{{client.name}}</div>
-                        <input class="hidden editers" type="text"
-                               ng-click="saveChange($event,client,'name')"
-                               value="test"/></td>
-                    <td>
-                        <div class="labelValues">{{client.designation}}</div>
-                        <input class="hidden editers" type="text"
-                               ng-click="saveChange($event,client,'designation')"
-                               value="{{ client.designation}}"/></td>
-                    <td>
-                        <div class="labelValues">{{client.company.name}}</div>
-                        <input class="hidden editers" type="text"
-                               ng-click="saveChange($event,client,'company.name')"
-                               value="{{ client.company.name}}"/></td>
-                    <td>
-                        <div class="labelValues">{{client.rating}}</div>
-                        <input class="hidden editers" type="text"
-                               ng-click="saveChange($event,client,'rating')"
-                               value="{{ client.rating}}"/></td>
-                    <td>
-                        <div class="labelValues">{{client.action}}</div>
-                        <input class="hidden editers"
-                               ng-click="saveChange($event, client, 'action')" type="checkbox"
-                               ng-checked="{{client.action}}"/></td>
-                    <td>
-                        <button type="button" class="btn btn-warning edit btn-xs">Edit</button>
-                        <button type="button" class="btn btn-primary save btn-xs hidden">Save
-                        </button>
-                        <button type="button" class="btn cancel btn-xs hidden">Cancel</button>
-                    </td>
-                </tr>
-            </table>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Sales
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>createdOn</th>
+                                <th>orderedBy</th>
+                                <th>customerAddress</th>
+                                <th>waterType</th>
+                                <th>roundOrdered</th>
+                                <th>slimOrdered</th>
+                                <th>costPerItem</th>
+                                <th>totalCost</th>
 
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd gradeX">
+                                <td>DATE</td>
+                                <td>Name Customer</td>
+                                <td>Address</td>
+                                <td>Mineral/Alkaline</td>
+                                <td class="center">X/0</td>
+                                <td class="center">X/0</td>
+                                <td class="center">Cost</td>
+                                <td class="center">Total Cost</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <!-- /.table-responsive -->
+
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <!-- /.row -->
         </div>
+        <!-- /#page-wrapper -->
     </div>
-    <!-- /.col-lg-12 -->
 </div>
-<!-- /.row -->
-
-<!-- /#page-wrapper -->
-
-
-
 </body>
 </html>

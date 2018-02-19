@@ -15,6 +15,7 @@
     <resultMap id="materialsMap" type="com.capstone.jmt.data.Material">
         <result column="material_id" property="materialId" jdbcType="VARCHAR" />
         <result column="material_desc" property="materialDesc" jdbcType="VARCHAR" />
+        <result column="material_unit" property="materialUnit" jdbcType="VARCHAR" />
         <result column="quantity" property="qty" jdbcType="INTEGER" />
         <result column="price" property="price" jdbcType="DECIMAL" />
         <result column="last_order" property="lastOrder" jdbcType="TIMESTAMP" />
@@ -76,6 +77,22 @@
         SELECT last_id FROM ref_role_user
         WHERE id = #{id}
     </select>
+
+    <insert id="addMaterial" flushCache="true">
+        INSERT INTO data_materials(
+          material_id, quantity, price, last_order, created_on, created_by, updated_by, material_desc, material_unit
+        ) VALUES (
+        #{material.materialId, jdbcType=VARCHAR},
+        #{material.qty, jdbcType=INTEGER},
+        #{material.price, jdbcType=DECIMAL},
+        #{material.lastOrder, jdbcType=TIMESTAMP},
+        #{material.createdOn, jdbcType=TIMESTAMP},
+        #{material.createBy, jdbcType=VARCHAR},
+        #{material.updatedBy, jdbcType=VARCHAR},
+        #{material.materialDesc, jdbcType=VARCHAR},
+        #{material.materialUnit, jdbcType=VARCHAR}
+        )
+    </insert>
     
     <!--<select id="getShopInfoById" resultMap="shopInfoMap" resultType="com.capstone.jmt.data.ShopInfo">-->
         <!--SELECT * FROM shop_info WHERE id = #{id}-->

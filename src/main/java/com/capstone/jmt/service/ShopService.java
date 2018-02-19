@@ -34,6 +34,8 @@ public class ShopService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    int ctr = 1;
+
 
     public LoginUser validateUser(LoginUser user) {
         logger.info("loadUserByUsername");
@@ -53,6 +55,14 @@ public class ShopService {
     public List<Material> getAllMaterials(){
         logger.info("getAllMaterials");
         return shopMapper.getAllMaterials();
+    }
+
+    public void addMaterial(Material material){
+        logger.info("addMaterial");
+        String matId = material.getMaterialDesc().substring(0,2).toUpperCase() + ctr;
+        material.setMaterialId(matId);
+        shopMapper.addMaterial(material);
+        ctr++;
     }
 
     public boolean addUser(LoginUser loginUser){

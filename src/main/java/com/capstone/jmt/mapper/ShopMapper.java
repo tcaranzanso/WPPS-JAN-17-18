@@ -30,6 +30,8 @@ public interface ShopMapper {
 
     int getLastId(@Param("id") int id);
 
+    void addMaterial(@Param("material") Material material);
+
 //    Double getTotalSalesById(@Param("shopId") String shopId);
 //
 //    Integer getSalesCount(@Param("shopId") String shopId);

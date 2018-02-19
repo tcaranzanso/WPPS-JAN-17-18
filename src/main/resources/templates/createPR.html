@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>WPPS | Users</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+
+<div id="wrapper" style="background-color: #014189">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Create Purchase Request</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <!--<label>Display Sales From:</label>
+                                <select class="form-control">
+                                    <option>Today</option>
+                                    <option>The past 7 days</option> Line 39 lang yung error ko
+                                    <option>The past 30 days</option>
+                                    <option>The past year</option>
+                                </select>-->
+
+                                <label style="color: black">Create Purchase Request</label>
+                            </div>
+                            <!-- OKS NA!!!!-->
+
+                        </form>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover"
+                               id="dataTables-example">
+                            <div class="row">
+                                <div class="col-md-6" style="margin-bottom: 15px">
+                                    <div class="dataTables_length">
+                                        <label style="color: black; font-weight: 500">PR#</label>
+                                        <input type="text" width="180px" height="30px" disabled="disabled"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--<thead>-->
+                            <!--<tr>-->
+                            <!--<th>Employee ID</th>-->
+                            <!--<th>Name</th>-->
+                            <!--<th>Email</th>-->
+                            <!--<th>Action</th>-->
+                            <!--&lt;!&ndash;<th>Cost per Bottle</th>-->
+                            <!--<th>No. of Slim</th>-->
+                            <!--<th>Cost per Bottle</th>-->
+                            <!--<th>Total Cost</th>&ndash;&gt;-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <tbody>
+                            <tr class="odd gradeX">
+                                <td>
+                                    <center>Requesting Department *</center>
+                                    <center><input type="text"/></center>
+                                </td>
+                                <td>
+                                    <center>Account Charge *</center>
+                                    <center><input type="text"/></center>
+                                </td>
+                                <td>
+                                    <center>Date Prepared *</center>
+                                    <center><input type="text"/></center>
+                                </td>
+                                <td>
+                                    <center>Date Needed *</center>
+                                    <center><input type="text"/></center>
+                                </td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td colspan="2">Type of Purchase *
+                                    <input type="radio" name="regular" style="margin-left: 25px"/><span
+                                            style="margin-left: 5px">Regular</span>
+                                    <input type="radio" name="urgent"/><span style="margin-left: 5px">Urgent</span>
+                                    <input type="radio" name="emergency"/><span
+                                            style="margin-left: 5px">Emergency</span>
+                                </td>
+
+                                <td colspan="2">Purpose *
+                                    <textarea name="text" style="margin: 0px; width: 312px; height: 54px"/>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                            <!--END FIRST TABLE -->
+                        </table>
+
+                        <table width="100%" class="table1 table-striped table-bordered table-hover"
+                               id="dataTables-example1">
+
+                            <thead>
+                            <tr class="odd gradeX" style="background: #014189">
+                                <th style="color: white"></th>
+                                <th style="color: white">Item #</th>
+                                <th style="color: white">Qty</th>
+                                <th style="color: white">Unit</th>
+                                <th width="500" style="color: white">Description</th>
+                                <th style="color: white">Unit Cost</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd gradeX" data-index="1" th:each="materialsData,iterStat: ${materials}">
+
+                                <td>
+                                    <input th:id="${iterStat.index}" type="checkbox" class="checky" name="feeids[]" value="1"/>
+                                </td>
+                                <td th:text="${materialsData.materialId}"></td>
+                                <td th:text="${materialsData.qty}"></td>
+                                <td th:text="${materialsData.materialUnit}"></td>
+                                <td th:text="${materialsData.materialDesc}"></td>
+                                <td th:text="${materialsData.price}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <button style="float: right; margin-right: 17px" type="button"  id="btnAddMaterial">ADD
+                            </button>
+                        </div>
+
+                        <!--END SECOND TABLE-->
+                    <form role="form" th:object="${newMaterial}" th:action="@{/addNewMaterial}" method="post">
+                        <table width="100%" class="table2 table-striped table-bordered table-hover"
+                               id="dataTables-example2">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <button th:type="submit" class="btn btn-primary">Save</button>
+                    </form>
+
+
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+      $('#btnAddMaterial').on('click', function(){
+          var getSelectedRows = $(".table1 input:checked").parents("tr").clone();
+          $(".table2 tbody").append(getSelectedRows);
+
+          $(".table2 td").each(function(index,data){
+              switch(index){
+                  case 0:
+                      $(this).remove();
+                  case 6:
+                      $(this).remove();
+              }
+          });
+      });
+
+
+
+
+
+//    var $checky = $("input[type=checkbox].checky");
+//
+//    $("input:checkbox#checked").change(function () {
+//        var filter;
+//        if (this.checked)
+//            filter = ':not(:checked)';
+//        else
+//            filter = ':checked';
+//        $checky.filter(filter).prop('checked', this.checked).trigger('change');
+//
+////        $('#tb1 tbody tr').clone().append("#tbl2 tbody");
+////        calculateTotal();
+//    });
+//
+//    $checky.change(function () {
+//        //calculateTotal();
+//        if ($(this).is(":checked")) {
+////            calculateTotal();
+//            $(this).closest('tr').clone().appendTo('dataTables-example2');
+////
+//        } else {
+//            var index = $(this).closest("tr").attr("data-index");
+//            var findRow = $("#dataTables-example2 tr[data-index='" + index + "']");
+//
+////            calculateTotal();
+//            findRow.remove();
+//        }
+//    });
+
+
+
+
+
+
+    /*]]>*/
+
+</script>
+</body>
+</html>

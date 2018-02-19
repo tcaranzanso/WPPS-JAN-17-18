@@ -12,10 +12,20 @@ public class Material {
     private String materialDesc;
     private int qty;
     private double price;
+    private String materialUnit;
     private Date lastOrder;
     private Date createdOn;
     private String createBy;
     private String updatedBy;
+
+
+    public String getMaterialUnit() {
+        return materialUnit;
+    }
+
+    public void setMaterialUnit(String materialUnit) {
+        this.materialUnit = materialUnit;
+    }
 
     public String getMaterialId() {
         return materialId;

@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>WPPS | Login</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body style="background-image: url('../static/images/mainbg3.jpg');
-width: auto;
-    height: auto;
-    background-repeat: no-repeat;">
-<!-- background-image: url('../images/mainbg3.jpg');
-    width: auto;
-    height: auto;
-    background-repeat: no-repeat;-->
+<body background="../static/images/mainbg3.jpg">
 
 <div class="container">
     <div class="row">
@@ -29,8 +22,7 @@ width: auto;
                     <fieldset>
                         <form th:object="${user}" th:action="@{/loginUser}" method="POST">
                             <div class="form-group">
-                                <center><img src="../static/images/rcbc-logo.png" height="140px" width="180px"/>
-                                </center>
+                                <center><img src="../static/images/rcbc-logo.png" height="140px" width="180px"/></center>
                             </div>
                             <div class="form-group">
                                 <h4>
@@ -49,7 +41,7 @@ width: auto;
                             </div>
                             <div class="form-actions form-group">
                                 <center>
-                                    <button id="btnSubmit" th:type="submit" class="btn btn-aqua">LOG IN</button>
+                                    <button id="btnSubmit" th:type="submit"  class="btn btn-aqua">LOG IN</button>
                                 </center>
                             </div>
                         </form>

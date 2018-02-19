@@ -126,7 +126,12 @@ public class WPPSController {
     @RequestMapping(value = "/addNewMaterial", method = RequestMethod.POST)
     public String addMaterial(@Valid Material material, Model model){
 
-
+        System.out.println("MATERIAL ENTITY: " + material);
+        System.out.println("MATERIAL ENTITY: " + material.getMaterialDesc());
+        System.out.println("MATERIAL ENTITY: " + material.getPrice());
+        System.out.println("MATERIAL ENTITY: " + material.getQty());
+        System.out.println("MATERIAL ENTITY: " + material.getMaterialUnit());
+        shopService.addMaterial(material);
 
         return "redirect:/dashboard";
     }
@@ -172,9 +177,17 @@ public class WPPSController {
 
         return "budget";
     }
-    @RequestMapping(value = "/sample", method = RequestMethod.GET)
+    @RequestMapping(value = "/invoice", method = RequestMethod.GET)
     public String showSample(){
 
-        return "sample";
+        return "invoice";
+    }
+
+    @RequestMapping(value = "/createPR", method = RequestMethod.GET)
+    public String createPR(Model model){
+
+        model.addAttribute("materials", shopService.getAllMaterials());
+        model.addAttribute("newMaterial", new Material());
+        return "createPR";
     }
 }
